@@ -1,5 +1,40 @@
 <?php
+session_start();
+
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$dbname = 'car_sales';
+
+$conn = mysqli_connect($host, $user, $pass, $dbname);
+
+if (!$conn) die("Connection failed");
+
 $msg = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    $check = mysqli_query($conn, "SELECT * FROM sellers WHERE username='$username' OR email='$email'");
+
+    if (mysqli_num_rows($check) > 0) {
+        $msg = "Username or Email already exists";
+    } else {
+        $sql = "INSERT INTO sellers (name, address, phone, email, username, password) 
+                VALUES ('$name','$address','$phone','$email','$username','$password')";
+
+        if (mysqli_query($conn, $sql)) {
+            $msg = "Registration successful! You can login now.";
+        } else {
+            $msg = "Registration failed";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
