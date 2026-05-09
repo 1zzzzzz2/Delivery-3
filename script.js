@@ -1,6 +1,5 @@
-const form = document.getElementById("form");
+const form = document.querySelector("form");
 const btn = document.getElementById("btn");
-const success = document.getElementById("success");
 const password = document.getElementById("password");
 const toggle = document.getElementById("toggle");
 const strength = document.querySelector(".strength");
@@ -9,6 +8,7 @@ const card = document.getElementById("card");
 window.onload = () => {
     card.style.opacity = 0;
     card.style.transform = "translateY(40px)";
+
     setTimeout(() => {
         card.style.transition = "0.6s";
         card.style.opacity = 1;
@@ -76,8 +76,8 @@ toggle.onclick = () => {
 form.addEventListener("submit", (e) => {
     let valid = true;
 
-    document.querySelectorAll("input").forEach(i => {
-        if (!validate(i)) valid = false;
+    document.querySelectorAll("input").forEach(input => {
+        if (!validate(input)) valid = false;
     });
 
     if (!valid) {
