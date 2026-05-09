@@ -1,3 +1,7 @@
+<?php
+$msg = "";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +25,7 @@
 <div class="container" id="card">
     <h2>Create Account</h2>
 
-    <form id="form">
+    <form id="form" method="POST" action="registration.php">
 
         <div class="form-group">
             <input type="text" name="name" required>
@@ -66,7 +70,9 @@
             <div class="spinner"></div>
         </button>
 
-        <p id="success"></p>
+        <p id="success" style="opacity: 1;">
+            <?php echo $msg; ?>
+        </p>
 
     </form>
 </div>
