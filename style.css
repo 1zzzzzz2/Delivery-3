@@ -1,0 +1,162 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: url('back.jpg') center/cover no-repeat;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 24px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    height: 26px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #00c6ff;
+}
+
+.container {
+    width: 400px;
+    margin: 65px auto;
+
+    padding: 30px 32px;
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(20px);
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+
+    box-sizing: border-box;
+}
+
+label {
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    transition: 0.25s;
+    color: #555;
+}
+
+input:focus + label,
+input:valid + label {
+    top: -7px;
+    font-size: 12px;
+    color: #007BFF;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.password-group input {
+    padding-right: 40px;
+}
+
+#toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.strength {
+    height: 4px;
+    background: linear-gradient(to right, red, yellow, green);
+    width: 0;
+    margin-top: 5px;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+
+    cursor: pointer;
+    position: relative;
+    font-size: 14px;
+}
+
+.spinner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    animation: spin 1s linear infinite;
+    opacity: 0;
+}
+
+button.loading .spinner {
+    opacity: 1;
+}
+
+button.loading .btn-text {
+    opacity: 0;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+#success {
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    color: green;
+    transition: 0.4s;
+}

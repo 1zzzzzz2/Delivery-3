@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+    <img src="logo.png" class="logo">
+
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="search.html">Search</a>
+        <a href="addcar.html">Add Car</a>
+    </div>
+</nav>
+
+<div class="container" id="card">
+    <h2>Create Account</h2>
+
+    <form id="form">
+
+        <div class="form-group">
+            <input type="text" name="name" required>
+            <label>Name</label>
+            <small class="error"></small>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="address" required>
+            <label>Address</label>
+            <small class="error"></small>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" name="phone" required>
+            <label>Phone</label>
+            <small class="error"></small>
+        </div>
+
+        <div class="form-group">
+            <input type="email" name="email" required>
+            <label>Email</label>
+            <small class="error"></small>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="username" required>
+            <label>Username</label>
+            <small class="error"></small>
+        </div>
+
+        <div class="form-group password-group">
+            <input type="password" name="password" id="password" required>
+            <label>Password</label>
+            <span id="toggle">👁</span>
+            <div class="strength"></div>
+            <small class="error"></small>
+        </div>
+
+        <button type="submit" id="btn">
+            <span class="btn-text">Register</span>
+            <div class="spinner"></div>
+        </button>
+
+        <p id="success"></p>
+
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
