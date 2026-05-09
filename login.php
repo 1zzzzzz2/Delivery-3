@@ -11,6 +11,13 @@ $conn = mysqli_connect($host, $user, $pass, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+$error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
