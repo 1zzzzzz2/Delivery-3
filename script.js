@@ -74,22 +74,16 @@ toggle.onclick = () => {
 };
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
     let valid = true;
+
     document.querySelectorAll("input").forEach(i => {
         if (!validate(i)) valid = false;
     });
 
-    if (!valid) return;
+    if (!valid) {
+        e.preventDefault();
+        return;
+    }
 
     btn.classList.add("loading");
-
-    setTimeout(() => {
-        btn.classList.remove("loading");
-        success.textContent = "✔ Registration Successful";
-        success.style.opacity = 1;
-        form.reset();
-        strength.style.width = "0";
-    }, 1500);
 });
