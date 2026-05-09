@@ -290,17 +290,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Seller Login</h2>
             <p class="subtitle">Welcome back to Car Sales Platform<br>Manage your vehicles safely and easily</p>
 
-            <form id="loginForm">
+            <?php if ($error): ?>
+                <p style="color:red; text-align:center; margin-bottom:15px;"><?= $error ?></p>
+            <?php endif; ?>
+
+            <form method="POST" action="login.php">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" id="username" placeholder="Enter your username">
-                    <div class="error" id="usernameError"></div>
+                    <input type="text" name="username" required placeholder="Enter your username">
                 </div>
 
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="password" placeholder="Enter your password">
-                    <div class="error" id="passwordError"></div>
+                    <input type="password" name="password" required placeholder="Enter your password">
                 </div>
 
                 <div class="remember-me">
@@ -331,41 +333,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         A safe and professional place to buy and sell vehicles online
     </footer>
 
-    <script>
-        const form = document.getElementById('loginForm');
-        const username = document.getElementById('username');
-        const password = document.getElementById('password');
-        const usernameError = document.getElementById('usernameError');
-        const passwordError = document.getElementById('passwordError');
-        const alphanumeric = /^[a-zA-Z0-9]+$/;
-
-        window.addEventListener('load', () => {
-            username.focus();
-        });
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let valid = true;
-
-            if (username.value.length < 6 || !alphanumeric.test(username.value)) {
-                usernameError.textContent = 'Username must be at least 6 alphanumeric characters';
-                valid = false;
-            } else {
-                usernameError.textContent = '';
-            }
-
-            if (password.value.length < 6 || !alphanumeric.test(password.value)) {
-                passwordError.textContent = 'Password must be at least 6 alphanumeric characters';
-                valid = false;
-            } else {
-                passwordError.textContent = '';
-            }
-
-            if (valid) {
-                alert('Login successfully! Welcome back.');
-                form.reset();
-            }
-        });
-    </script>
 </body>
 </html>
