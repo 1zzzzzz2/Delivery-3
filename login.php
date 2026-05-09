@@ -24,6 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_stmt_get_result($stmt);
     $user = mysqli_fetch_assoc($result);
 
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['seller_id'] = $user['seller_id'];
+        $_SESSION['username'] = $user['username'];
+        header("Location: addcar.php");
+        exit();
+    } else {
+        $error = "Invalid username or password";
+    }
 }
 ?>
 <!DOCTYPE html>
