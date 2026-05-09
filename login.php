@@ -268,15 +268,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-    <div class="navbar">
+<div class="navbar">
+    <div style="display:flex; align-items:center; gap:10px;">
         <img src="logo.png" alt="Car Sales Logo" class="logo">
-        <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="registration.html">Registration</a>
-            <a href="addcar.html">Add Car</a>
-            <a href="search.html">Search</a>
-        </div>
+        <?php if(isset($_SESSION['username'])): ?>
+            <span style="color:#0066cc; font-weight:bold; font-size:16px;">
+                Welcome, <?= $_SESSION['username'] ?> <a href="logout.php" style="color:#0066cc; margin-left:8px; font-size:14px; text-decoration:none;">Logout</a>
+            </span>
+        <?php endif; ?>
     </div>
+    <div class="nav-links">
+        <a href="home.php">Home</a>
+        <a href="registration.php">Registration</a>
+        <a href="addcar.php">Add Car</a>
+        <a href="search.php">Search</a>
+    </div>
+</div>
 
     <div class="page-wrapper">
         <div class="login-container">
@@ -304,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit">Login Now</button>
 
                 <div class="register-prompt">
-                    Don’t have an account? <a href="registration.html">Register as Seller</a>
+                    Don’t have an account? <a href="registration.php">Register as Seller</a>
                 </div>
 
                 <div class="divider">
