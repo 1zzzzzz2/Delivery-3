@@ -20,7 +20,7 @@ while ($row = mysqli_fetch_assoc($result)) $cars[] = $row;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Sales - Search</title>
-    <style>
+     <style>
         * {
             margin: 0;
             padding: 0;
