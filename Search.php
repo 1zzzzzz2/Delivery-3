@@ -242,31 +242,39 @@ while ($row = mysqli_fetch_assoc($result)) $cars[] = $row;
     </style>
 </head>
 <body>
-    <div class="navbar">
+<div class="navbar">
+    <div style="display: flex; align-items: center; gap: 12px;">
         <img src="logo.png" alt="Car Sales Logo" class="logo">
-        <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="registration.html">Registration</a>
-            <a href="login.html">Login</a>
-            <a href="addcar.html">Add Car</a>
-            <a href="search.html">Search</a>
-        </div>
+        <?php if(isset($_SESSION['username'])): ?>
+            <span style="color: #0066cc; font-weight: bold; font-size: 15px;">
+                Welcome, <?= $_SESSION['username'] ?> <a href="logout.php" style="margin-left:8px;color:#0066cc;font-size:14px;text-decoration:none;">Logout</a>
+            </span>
+        <?php endif; ?>
     </div>
+
+    <div class="nav-links">
+        <a href="home.php">Home</a>
+        <a href="registration.php">Registration</a>
+        <a href="login.php">Login</a>
+        <a href="addcar.php">Add Car</a>
+        <a href="search.php">Search</a>
+    </div>
+</div>
 
     <div class="search-wrapper">
         <div class="search-container">
             <h2>Find Your Car</h2>
             <p class="subtitle">Search vehicles by model and year</p>
 
-            <form id="searchForm">
+            <form id="searchForm" action="search.php" method="get">
                 <div class="form-row">
                     <div class="form-group">
                         <label>Car Model</label>
-                        <input type="text" id="model" placeholder="e.g. Toyota, BMW, Honda" required>
+                        <input type="text" name="model" placeholder="e.g. Toyota, BMW, Honda" required>
                     </div>
                     <div class="form-group">
                         <label>Year</label>
-                        <input type="number" id="year" placeholder="e.g. 2020" min="2000" max="2026" required>
+                        <input type="number" name="year" placeholder="e.g. 2020" min="2000" max="2026" required>
                     </div>
                 </div>
                 <button type="submit" class="search-btn">Search Cars</button>
@@ -274,7 +282,26 @@ while ($row = mysqli_fetch_assoc($result)) $cars[] = $row;
 
             <div class="results" id="results">
                 <h3>Cars For Sale</h3>
-                <div id="carList"></div>
+                <div id="carList">
+                    <?php foreach ($cars as $car): ?>
+                    <div class="car-item">
+                        <img src="uploads/<?= $car['image'] ?>" class="car-image">
+                        <div class="car-detail">
+                            <h4><?= $car['model'] ?></h4>
+                            <div class="car-info">
+                                Year: <?= $car['year'] ?><br>
+                                Color: <?= $car['color'] ?><br>
+                                Price: <?= $car['price'] ?><br>
+                                Location: <?= $car['location'] ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+
+                    <?php if (empty($cars)): ?>
+                    <p>No cars found.</p>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
@@ -282,101 +309,5 @@ while ($row = mysqli_fetch_assoc($result)) $cars[] = $row;
     <footer>
         © 2026 Premium Car Sales Platform | All Rights Reserved
     </footer>
-
-    <script>
-        const cars = [
-            {
-                model: "Mercedes-Benz S-Class",
-                year: 2023,
-                color: "Silver",
-                price: "$110,000",
-                location: "Beijing",
-                image: "Mercedes-Benz S-Class.jpg"
-            },
-            {
-                model: "Porsche 911",
-                year: 2022,
-                color: "White",
-                price: "$120,000",
-                location: "Shanghai",
-                image: "Porsche 911.jpg"
-            },
-            {
-                model: "Audi A4",
-                year: 2023,
-                color: "White",
-                price: "$38,000",
-                location: "Guangzhou",
-                image: "Audi A4.jpg"
-            },
-            {
-                model: "Audi A6",
-                year: 2022,
-                color: "Black",
-                price: "$55,000",
-                location: "Shenzhen",
-                image: "Audi A6.jpg"
-            },
-            {
-                model: "Toyota Camry",
-                year: 2024,
-                color: "Silver",
-                price: "$30,000",
-                location: "Hangzhou",
-                image: "Camry.jpg"
-            },
-            {
-                model: "Honda Civic",
-                year: 2021,
-                color: "Yellow",
-                price: "$25,000",
-                location: "Chengdu",
-                image: "Civic.jpg"
-            }
-        ];
-
-        const carList = document.getElementById("carList");
-        const form = document.getElementById("searchForm");
-
-        window.addEventListener("load", function() {
-            showCars(cars);
-        });
-
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const model = document.getElementById("model").value.toLowerCase();
-            const year = parseInt(document.getElementById("year").value);
-
-            const filtered = cars.filter(car =>
-                car.model.toLowerCase().includes(model) && car.year === year
-            );
-            showCars(filtered);
-        });
-
-        function showCars(carArray) {
-            carList.innerHTML = "";
-            if (carArray.length === 0) {
-                carList.innerHTML = `<p style="color:#333;">No cars found for your search.</p>`;
-            } else {
-                carArray.forEach(car => {
-                    const div = document.createElement("div");
-                    div.className = "car-item";
-                    div.innerHTML = `
-                        <img src="${car.image}" class="car-image" alt="${car.model}">
-                        <div class="car-detail">
-                            <h4>${car.model}</h4>
-                            <div class="car-info">
-                                Year: ${car.year}<br>
-                                Color: ${car.color}<br>
-                                Price: ${car.price}<br>
-                                Location: ${car.location}
-                            </div>
-                        </div>
-                    `;
-                    carList.appendChild(div);
-                });
-            }
-        }
-    </script>
 </body>
 </html>
