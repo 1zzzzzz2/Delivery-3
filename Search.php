@@ -1,3 +1,19 @@
+<?php
+session_start(); 
+$conn = mysqli_connect("localhost", "root", "", "car_sales");
+
+$model = $_GET['model'] ?? '';
+$year = $_GET['year'] ?? '';
+
+$sql = "SELECT * FROM cars WHERE 1=1";
+if ($model) $sql .= " AND model LIKE '%$model%'";
+if ($year) $sql .= " AND year = '$year'";
+
+$result = mysqli_query($conn, $sql);
+$cars = [];
+while ($row = mysqli_fetch_assoc($result)) $cars[] = $row;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
